@@ -24,11 +24,7 @@ namespace Library
             Contact contact = new Contact(name);
             this.persons.Add(contact);
         }
-        //eliminar un contacto de la lista persons
-        public void Remove(Contact contact)
-        {
-            this.persons.Remove(contact);
-        }
+        
 
         public List<Contact> Search(string[] names)
         {
@@ -50,6 +46,16 @@ namespace Library
         //Metodo para enviar mensajes a canales
         public void SendMessageChannel(string text, IMessageChannel channel, string[] name)
         {
+            // Hace que a la lista de contactos ya creada mande el mensaje a sus destinatarios, creando la instancia Message
+            //Para esto tuve que hacer public message (estaba protegida)
+            //
+            foreach (Contact reciever in Search(name))
+            {
+                Message message = new Message(this.Owner.Name, reciever.Name);
+                message.Text = text;
+                channel.Send(message,reciever);
+            }
             
         }
+    }
 }

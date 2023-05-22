@@ -2,6 +2,6 @@ namespace Library
 {
     public interface IMessageChannel
     {
-         void Send(Message message, Contact reciever);
+        void Send(Message message, Contact reciever);
     }
 }
